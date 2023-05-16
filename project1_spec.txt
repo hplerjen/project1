@@ -1,0 +1,90 @@
+Ziel von Projekt 1
+• Grundlagen festigen von CSS/JS/HTML
+
+Aufgabe
+• Erstellen einer Notizenapplikation
+
+UC: neue Notiz erstellen / Notize ändern
+
+Notiz:
+Name
+DueDate
+CreationDate
+Importance
+
+Filterbare, Sortierbare Tabelle
+
+CSS: Toggle-Style
+
+Html Layout: Grid oder Flex
+
+Einschränkungen:
+Das Projekt sollte gut strukturiert sein aber weitgehend auf die Nutzung von Frameworks
+verzichten
+• Nutzung eines SPA Frameworks (Angular oder React oder ...) ist nicht erlaubt
+− Nutzung des MVC Patterns trotzdem sinnvoll
+• Nutzung von Layout / Styling-Framework wie Bootstrap nicht erlaubt
+− Flexbox und Grid nutzen
+• Nutzung von simpler Templating Engine (z.B. Handlebars) oder Template Strings ist verlangt.
+• Libraries wie Moment.js sind erlaubt.
+• Ältere Browser müssen nicht unterstützt werden. 
+
+Bewertung:
+Das Projekt 1 wird in 5 Kategorien angeschaut. Jede Kategorie muss erfüllt sein.
+• Funktionsumfang
+• Architektur
+• JS / CSS / HTML Qualität
+
+Funktionsumfang
+Der Funktionsumfang ist in den Wireframes dargestellt. Diese beinhalten u.a.
+− Anzeigen, editieren und erfassen von Notizen
+− Sortieren von Notizen
+− Filtern von „abgeschlossenen" Notizen
+− Abspeichern der Daten auf dem Server
+− Wechseln des Styles
+
+Allgemeine Code Guidelines
+• Unterstützung modernen Browsers & Features (Ältere Browser können vernachlässigt werden)
+• Saubere Trennung von Struktur (HTML), Logik (JS) und Darstellung (CSS)
+• Sauberen Code
+− DRY: Kein Copy-Paste-Code (auch keine 'ähnlicher Code'!)
+− ESLint
+− …
+• Kein CSS / JS im HTML
+• Übersichtliche Projekt-Struktur
+
+Architektur
+• REST: Server und Client kommunizieren über JSON
+• Client:
+− Server-Calls nur im Service Layer
+− Routing/Event-Handling nur im Controller
+− Rendering/DOM Manipulation nur in der View
+− View und Controller können im gleichem File definiert werden.
+− Kein HTML Zusammenbasteln aus String
+− Handlebars oder Template Strings verwenden
+• Server
+− Memory-Storage- / DB-Zugriffe nur im Service
+− Controller stellt Actions/Request-Handlers zur Verfügung
+− Router: Verknüpfung von Routen und Actions/Request-handlers
+
+JavaScript
+• Nutzung einer Template Engine (z.B. Handlebars) oder Template Strings auf dem Client
+• Keine Console Pollution
+• Kein auskommentierter Code
+• Kein «global namespace pollution»
+• …
+• CSS
+• FlexBox / CSS Grid
+• Keine unnötigen Klassen & ID's
+− Kein Copy & Paste
+• Inline Styles sind nicht erlaubt
+• HTML
+• Korrekter Einsatz von Semantischem HTML
+• Sinnvolle HTML Validation
+
+Abgabetermin 25.06.2023 – Mitternacht
+• Branch erstellen mit dem Namen «Abgabe»
+• E-Mail erstellen mit folgendem Inhalt:
+− Subject: [CAS FEE] Abgabe
+− Link zum Branch
+− Ein ReadMe auf GitHub, falls dieses notwendig ist. 
