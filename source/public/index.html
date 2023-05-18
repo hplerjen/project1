@@ -3,34 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="scripts/index.js" type="module"></script>
-
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>-->
+  <script src="scripts/index.js" type="text/javascript"></script>
+  <script src="scripts/noteModel.js" type="text/javascript"></script>
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-<h1>Note App HP</h1>
-<table>
-  <tr><th>title</th>
-  <th>due date</th>
-  <th>creation date</th>
-  <th>importance</th>
-  <th>details</th>
-  <th>status</th></tr>
-  <tr><td>title1</td>
-  <td>due date1</td>
-  <td>creation date1</td>
-  <td>importance1</td>
-  <td>details1</td>
-  <td>status1</td></tr>
-  <tr><td>title2</td>
-  <td>due date2</td>
-  <td>creation date2</td>
-  <td>importance2</td>
-  <td>details2</td>
-  <td>status2</td></tr>
-</table>
 
+<!-- define table header -->
+<h1>Notes</h1>
+<table id="notes">
+  <tr>
+    <th id="id">id <button id="id-asc">asc</button><button id="id-desc">desc</button></th>
+    <th id="title">title</th>
+    <th id="duedate">due date</th>
+    <th>creation date</th>
+    <th>importance</th>
+    <th>details</th>
+    <th>status</th></tr>
+</table>
+<p id="currentTime"> </p>
+<script>
+  const noteList = document.querySelector("#notes");
+  
+  function addSortButton(id, sortWay){
+    const button = document.createElement("button");
+    button.setId(id + sortWay);
+    button.addEventListener('click', () => {
+        notes.notesSorted();
+        renderNotes();
+    })
+  }
+
+  function addSortButtons(id){
+    document.getElementById(id).appendChild(addSortButton (id, "asc"));
+    document.getElementById(id).appendChild(addSortButton (id, "desc"));
+  }
+
+  function createTableCellElement(data, tableCellType) {
+    const tableCellElement = document.createElement(tableCellType);
+    tableCellElement.textContent = data;
+    return tableCellElement;
+  }
+
+  function renderNotes() {
+    const df = document.createDocumentFragment();
+    for (const note of notes) {
+      const rowElement = document.createElement("tr");
+      rowElement.appendChild(createTableCellElement(note.id, "td"), );
+      rowElement.appendChild(createTableCellElement(note.title, "td"));
+      rowElement.appendChild(createTableCellElement(note.dueDate, "td"));
+      rowElement.appendChild(createTableCellElement(note.creationDate, "td"));
+      rowElement.appendChild(createTableCellElement(note.importance, "td"));
+      rowElement.appendChild(createTableCellElement(note.details, "td"));
+      rowElement.appendChild(createTableCellElement(note.status, "td"));
+      df.appendChild(rowElement);
+    }
+    noteList.appendChild(df);
+    document.getElementById("currentTime").innerHTML = new Date();
+  }
+
+
+    renderNotes()
+</script>
 
 </body>
 </html>
