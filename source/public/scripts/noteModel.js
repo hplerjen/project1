@@ -9,7 +9,7 @@ const notes = [
      "status" : 4 
     },
     {"id": "1", 
-    "title": "Note 1", 
+    "title": "ANote 1", 
     "dueDate": "2023/05/18", 
     "creationDate": "2023/05/01", 
      "importance": 3,
@@ -18,13 +18,20 @@ const notes = [
     }
 ];
 
-
-function compareNotes(n1, n2) {
+function compareNotesAsc(n1, n2) {
     return n1.id - n2.id;
 }
 
-function notesSorted(){
-    return [...notes].sort(compareNotes());
+function compareNotesDesc(n1, n2) {
+    return n2.id - n1.id;
+}
+
+function notesSortedAsc(){
+    return [...notes].sort(compareNotesAsc);
+}
+
+function notesSortedDesc(){
+    return [...notes].sort(compareNotesDesc);
 }
 
 
