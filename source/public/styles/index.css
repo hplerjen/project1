@@ -1,40 +1,64 @@
-* {
-    box-sizing: border-box;
+:root {
+  --background: white;
+  --color: #222;
 }
 
-#notes .button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
+.dark-theme {
+  --background: #222;
+  --color: white;
+}
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--background);
+  color: var(--color);
+}
 
-#notes {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  #notes td, #notes th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  #notes tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #notes tr:hover {background-color: #ddd;}
-  
-  #notes th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #04AA6D;
-    color: white;
-  }
+header {
+  flex: 0 0 100%;
+}
+
+main {
+  flex: 0 0 80%;
+}
+
+aside {
+  flex: 0 0 20%;
+}
+
+footer {
+  flex: 0 0 100%;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label {
+  flex: 0 0 35%;
+}
+
+input,
+textarea,
+select {
+  flex: 0 0 60%;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 1200;
+  border-bottom: 1px solid #000;
+}
+
+textarea {
+  height: 150px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 13px;
+}

@@ -3,99 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>-->
-  <script src="scripts/index.js"></script>
-  <script src="scripts/noteModel.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="scripts/index.js" type="module"></script> 
+  <script src="js/controlers/note-controler.js" type="module" defer></script>
+
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-
-<!-- define table header -->
-<h1>Notes</h1>
-<table id="notes"></table>
-<p id="currentTime"> </p>
-
-<script>
-  const notesTableElement = document.querySelector("#notes");
-
-  function createSortButton(id, sortWay){
-    const button = document.createElement("button");
-    button.id = id + sortWay;
-    button.class = "button";
-    button.addEventListener('click', () => {
-        if (sortWay = "asc"){
-          console.log("button" + button.id);
-          console.log("asc");
-          const notes1 = notesSortedAsc();
-          console.log(notes1);
-        } else {
-          console.log("button" + button.id);
-          console.log("desc");
-          const notes2 = notesSortedDesc();
-          console.log(notes2);
-        }
-
-
-        renderNotes();
-    })
-    return button;
-  }
-
-  function createTableCellElement(data, tableCellType) {
-    const tableCellElement = document.createElement(tableCellType);
-    tableCellElement.textContent = data;
-    return tableCellElement;
-  }
-
-  function createTableHeaderCellElementWithSortButtons(id){
-    const tableCellElement = document.createElement("th");
-    tableCellElement.id = id;
-    tableCellElement.textContent = id;
-    tableCellElement.insertAdjacentElement("beforeend", createSortButton (id, "asc"));
-    tableCellElement.insertAdjacentElement("beforeend", createSortButton (id, "desc"));
-    return tableCellElement;
-  }
-
-  function removeAllChildren(notesTableElement) {
-    while (notesTableElement.firstChild) {
-      notesTableElement.removeChild(notesTableElement.firstChild);
-    }
-  }
-
-  function renderNotes() {
-    
-    const df = document.createDocumentFragment();
-
-    const rowElement = document.createElement("tr");
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("id"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("title"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("dueDate"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("creationDate"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("importance"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("details"));
-      rowElement.appendChild(createTableHeaderCellElementWithSortButtons("status"));
-      df.appendChild(rowElement);
-
-    for (const note of notesSortedAsc) {
-      const rowElement = document.createElement("tr");
-      rowElement.appendChild(createTableCellElement(note.id, "td"), );
-      rowElement.appendChild(createTableCellElement(note.title, "td"));
-      rowElement.appendChild(createTableCellElement(note.dueDate, "td"));
-      rowElement.appendChild(createTableCellElement(note.creationDate, "td"));
-      rowElement.appendChild(createTableCellElement(note.importance, "td"));
-      rowElement.appendChild(createTableCellElement(note.details, "td"));
-      rowElement.appendChild(createTableCellElement(note.status, "td"));
-      df.appendChild(rowElement);
-    }
-    removeAllChildren(notesTableElement);
-
-    notesTableElement.appendChild(df);
-    document.getElementById("currentTime").innerHTML = new Date();
-  }
-
-
-    renderNotes()
+  <header>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+      </ul>
+    </nav>
+    <button type="button" id="theme-button">Toggle Darktheme</button>
+  </header>
+  
+<main>
+  <h1>Note App (CAS FEE Project 1 v2) </h1>
+  
+  <script id="note-list-template" type="text/x-handlebars-template"></script>
+   {{#each notes}}
+  <div>
+      <span>{{id}}  {{title}}</span>
+      <input type="button" value="Edit" data-note-id="{{id}}">
+  </div>
+  {{/each}}
 </script>
+<script>
+  noteTemplateCompiled = Handlebars.compile(document.getElementById('note-list-template').innerHTML);
+</script>
+
+</main>
+
+<footer>
+  <p>&copy; Hans-Peter Lerjen, OST Rapperswil 2023</p>
+</footer>
 
 </body>
 </html>
