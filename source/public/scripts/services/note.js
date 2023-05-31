@@ -1,11 +1,11 @@
-class Note {
+export default class Note {
     constructor(id, creationDate, duedate, title, description, importance) {
         this.id = id;
-        this.creationDate = this.creationDate || new Date();
-        this.duedate = this.duedate || new Date();
-        this.title = title || "";
-        this.description = this.description || "";
-        this.importance = this.importance || 0;
+        this.creationDate = creationDate || new Date();
+        this.duedate = duedate || new Date() ;
+        this.title = title || "" ;
+        this.description = description || "";
+        this.importance = importance || 0;
     }
 
     toJSON() {
@@ -19,3 +19,4 @@ class Note {
         };
     }
 }
+
