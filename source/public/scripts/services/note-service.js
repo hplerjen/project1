@@ -17,10 +17,27 @@ export class NoteService {
                 n.importance
             )
         );
+        if (this.notes.length === 0) { // initial data seed
+            this.notes.push(new Note(1, 
+                new Date("2022-03-25"), 
+                new Date("2023-06-25"), 
+                "Mary's Birthday" , 
+                "Get her a present" , 4));
+            this.notes.push(new Note(2, 
+                    new Date("2022-03-01"), 
+                    new Date("2023-06-23"), 
+                    "Book of Brama" , 
+                    "Purchase at amazon",
+                    1));
+            this.save();
+        }
     }
 
     save() {
-        this.storage.update(this.notes.map(n => n.toJSON()));
+        // eslint-disable-next-line no-debugger
+        debugger;
+        const jsonArray = this.notes.map(n => n.toJSON);
+        this.storage.update(jsonArray); 
     }
 }
 

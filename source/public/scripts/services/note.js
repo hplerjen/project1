@@ -1,4 +1,5 @@
-export default class Note {
+/* eslint-disable import/prefer-default-export */
+export class Note {
     constructor(id, creationDate, duedate, title, description, importance) {
         this.id = id;
         this.creationDate = creationDate || new Date();
@@ -18,5 +19,4 @@ export default class Note {
             importance: this.importance
         };
     }
-}
-
+};

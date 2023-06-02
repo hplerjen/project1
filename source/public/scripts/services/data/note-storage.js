@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
-class NoteStorage {
+// eslint-disable-next-line import/prefer-default-export
+export class NoteStorage {
     constructor() {
         const notes = JSON.parse(localStorage.getItem('noteStorage_v1') || "[ ]");
         this.notes = notes;
@@ -10,7 +10,9 @@ class NoteStorage {
         return this.notes;
     }
 
-    update(notes) {
+    update() {
+        // eslint-disable-next-line no-debugger
+        debugger;
         localStorage.setItem('noteStorage_v1', JSON.stringify(this.notes));
         return this.notes;
     }
