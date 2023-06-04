@@ -67,3 +67,27 @@ section {
   margin-bottom: 20px;
   margin-top: 10px;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  padding: 10px;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  padding: 20px;
+  text-align: right;
+}
+
+.grid-item2 {
+  padding: 20px;
+  text-align: right;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}

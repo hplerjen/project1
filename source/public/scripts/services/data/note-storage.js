@@ -11,8 +11,6 @@ export class NoteStorage {
     }
 
     update() {
-        // eslint-disable-next-line no-debugger
-        debugger;
         localStorage.setItem('noteStorage_v1', JSON.stringify(this.notes));
         return this.notes;
     }

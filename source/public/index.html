@@ -9,35 +9,92 @@
    
   <link rel="stylesheet" href="styles/index.css">
 
-  <script id="note-list-template" type="text/x-handlebars-template">
-      
-    {{#each notes}}
-    <div>
-     <span>{{id}}  {{title}}</span>
-     <!--<input type="button" value="Edit" data-note-id="{{id}}">-->
-    </div>
+  <script id="note-list-template" type="text/x-handlebars-template"> 
+    
+    <div class="grid-container">
+
+      <div class="grid-item"><h2>ID</h2></div>
+      <div class="grid-item"><h2>Title</h2></div>
+      <div class="grid-item"><h2>Description</h2> </div>
+      <div class="grid-item"><h2>Importance</h2> </div>
+      <div class="grid-item"><h2>Due Date</h2> </div>
+      <div class="grid-item"><h2>Creation Date</h2> </div>
+      <div class="grid-item"><h2>Action</h2> </div>
+    
+      {{#each notes}}
+    
+      <div class="grid-item">{{id}}</div>
+      <div class="grid-item">{{title}}</div>
+      <div class="grid-item">{{description}} </div>
+      <div class="grid-item">{{importance}} </div>
+      <div class="grid-item">{{dueDate}}  </div>
+      <div class="grid-item">{{creationDate}} </div>
+      <div class="grid-item"><input type="button" value="Edit" data-note-id="{{id}}"></div>
+    
     {{/each}}
 
+    </div>
   </script> 
   
 
 </head>
 <body>
   <header>
-    <nav>
+    <!--<nav>
       <ul>
         <li><a href="./index.html">Home</a></li>
       </ul>
-    </nav>
+    </nav>-->
     <button type="button" id="theme-button">Toggle Darktheme</button>
   </header>
   
 <main>
   <h1>Note App (CAS FEE Project 1 v2) </h1>
   
-  <section id="note-container">
+  <section id="note-list">
 
   </section>
+
+  <section id="note-edit">
+
+   <h1 id="note-edit-title">Note Create</h1>
+
+ <div class="grid-container2">
+
+  <form id="note-form">
+    
+    <div class="grid-item"><label for="id">ID</label></div>
+    <div class="grid-item"><p id="data-note-id" type="text" name="id" readonly></p></div>
+    
+    <div class="grid-item"><label for="title">Title</label></div>
+    <div class="grid-item"><input id="data-note-title" type="text" name="title" required/></div>
+
+    <div class="grid-item"><label for="description">Description</label></div>
+    <div class="grid-item"><textarea id="data-note-description" name="description" minlength="10"  required></textarea></div>
+    
+    <div class="grid-item"><label for="importance">Importance</label></div>
+    <div class="grid-item"><select name="importance" id="data-note-importance" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select></div>
+
+    <div class="grid-item"><label for="duedate">DueDate</label></div>
+    <div class="grid-item"><input id="data-note-duedate" type="date" name="duedate" required /></div>
+
+    <div class="grid-item"><label for="creation-date">CreationDate</label></div>
+    <div class="grid-item"><p id="data-note-creation-date" type="date" name="creation-date" readonly></p></div>
+
+    <div class="grid-item2"><button id="note-action" type="submit" data-action="addNote">Send</button></div>
+
+  </form>
+   
+  </div>
+  </section>
+
+
 
 </main>
 

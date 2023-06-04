@@ -1,22 +1,22 @@
 /* eslint-disable import/prefer-default-export */
 export class Note {
-    constructor(id, creationDate, duedate, title, description, importance) {
+    constructor(id, title, description, importance, creationDate, dueDate ) {
         this.id = id;
-        this.creationDate = creationDate || new Date();
-        this.duedate = duedate || new Date() ;
         this.title = title || "" ;
         this.description = description || "";
         this.importance = importance || 0;
+        this.creationDate = creationDate || new Date();
+        this.dueDate = dueDate || new Date() ;
     }
 
     toJSON() {
         return {
             id: this.id,
-            creationDate: this.creationDate,
-            duedate: this.duedate,
             title: this.title,
             description: this.description,
-            importance: this.importance
+            importance: this.importance,
+            creationDate: this.creationDate,
+            dueDate: this.dueDate,
         };
     }
 };
