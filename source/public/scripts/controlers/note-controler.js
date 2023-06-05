@@ -11,6 +11,7 @@ class NoteController {
             const noteId = Number(event.target.dataset.noteId);
             const note = noteService.getNoteById(noteId);
             document.getElementById("note-edit-title").innerHTML = "Note Edit";
+            document.getElementById("note-action").innerHTML = "updateNote";
             document.getElementById("data-note-id").innerHTML = note.id;
             document.getElementById("data-note-title").innerHTML = note.title;
             document.getElementById("data-note-description").innerHTML= note.description;
@@ -23,7 +24,8 @@ class NoteController {
         this.noteForm.addEventListener('submit', (event) => {
         
         //update / create note
-        const noteAction = event.target.dataset.action;
+        debugger;
+        const noteAction = document.activeElement.dataset.action;
         
         if (noteAction === "updateNote" && event.target.dataset.noteid != null){
             debugger;
@@ -38,7 +40,7 @@ class NoteController {
             const description = event.target.dataset.noteDescription;
             const importance = Number(event.target.dataset.noteImportance);
             const dueDate = event.target.dataset.noteDuedate;
-            noteService.createNote(title, description, importance, dueDate);
+            noteService.addNote(title, description, importance, dueDate);
         } else {
             //somethin went wrong
         }

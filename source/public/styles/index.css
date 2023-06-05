@@ -63,6 +63,11 @@ button {
   font-size: 13px;
 }
 
+button-small {
+  padding: 5px 10px;
+  font-size: 5px;
+}
+
 section {
   margin-bottom: 20px;
   margin-top: 10px;

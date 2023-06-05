@@ -21,13 +21,13 @@ export class NoteService {
             )
         );
         if (this.notes.length === 0) { // initial data feed
-            this.createNote(
+            this.addNote(
                 "Mary's Birthday" , 
                 "Get her a present" , 
                 4,
                 new Date("2022-03-25"), 
                 new Date("2023-06-25") );
-            this.createNote(
+            this.addNote(
                     "Book of Brama" , 
                     "Purchase at amazon",
                     1,
@@ -42,7 +42,7 @@ export class NoteService {
         this.storage.update(jsonArray); 
     }
 
-    createNote(title, description, importance, dueDate){
+    addNote(title, description, importance, dueDate){
         this.notes.push(new Note(
             this.createId(), title, description, importance, new Date(), dueDate));
         this.notes.sort();

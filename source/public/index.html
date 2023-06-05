@@ -13,6 +13,42 @@
     
     <div class="grid-container">
 
+      <div class="grid-item"><h2></h2></div>
+      <div class="grid-item">
+        <h2>
+          <button class="button-small" id="title-sort-ASC" type="click" data-action="title-sort-ASC">ASC</button>
+          <button class="button-small" id="title-sort-DESC" type="click" data-action="title-sort-DESC">DESC</button>
+        </h2>
+      </div>
+      <div class="grid-item">
+        <h2>
+          <button class="button-small" id="desc-sort-ASC" type="click" data-action="desc-sort-ASC">ASC</button>
+          <button class="button-small" id="desc-sort-DESC" type="click" data-action="desc-sort-DESC">DESC</button>
+        </h2>
+      </div>
+
+      <div class="grid-item">
+        <h2>
+          <button class="button-small" id="imp-sort-ASC" type="click" data-action="imp-sort-ASC">ASC</button>
+          <button class="button-small" id="imp-sort-DESC" type="click" data-action="imp-sort-DESC">DESC</button>
+        </h2>
+      </div>
+
+      <div class="grid-item">
+        <h2>
+          <button class="button-small" id="ddate-sort-ASC" type="click" data-action="ddate-sort-ASC">ASC</button>
+          <button class="button-small" id="ddate-sort-DESC" type="click" data-action="ddate-sort-DESC">DESC</button>
+        </h2>
+      </div>
+
+      <div class="grid-item">
+        <h2>
+          <button class="button-small" id="cdate-sort-ASC" type="click" data-action="cdate-sort-ASC">ASC</button>
+          <button class="button-small" id="cdate-sort-DESC" type="click" data-action="cdate-sort-DESC">DESC</button>
+        </h2>
+      </div>
+      <div class="grid-item"><h2></h2></div>
+
       <div class="grid-item"><h2>ID</h2></div>
       <div class="grid-item"><h2>Title</h2></div>
       <div class="grid-item"><h2>Description</h2> </div>
@@ -59,39 +95,39 @@
 
    <h1 id="note-edit-title">Note Create</h1>
 
- <div class="grid-container2">
 
-  <form id="note-form">
-    
-    <div class="grid-item"><label for="id">ID</label></div>
-    <div class="grid-item"><p id="data-note-id" type="text" name="id" readonly></p></div>
-    
-    <div class="grid-item"><label for="title">Title</label></div>
-    <div class="grid-item"><input id="data-note-title" type="text" name="title" required/></div>
+   <form id="note-form">
+ 
+    <div class="grid-container2">
 
-    <div class="grid-item"><label for="description">Description</label></div>
-    <div class="grid-item"><textarea id="data-note-description" name="description" minlength="10"  required></textarea></div>
-    
-    <div class="grid-item"><label for="importance">Importance</label></div>
-    <div class="grid-item"><select name="importance" id="data-note-importance" required>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select></div>
+      <div class="grid-item"><label for="id">ID</label></div>
+      <div class="grid-item"><p id="data-note-id" type="text" name="id" readonly></p></div>
+      
+      <div class="grid-item"><label for="title">Title</label></div>
+      <div class="grid-item"><input id="data-note-title" type="text" name="title" required/></div>
 
-    <div class="grid-item"><label for="duedate">DueDate</label></div>
-    <div class="grid-item"><input id="data-note-duedate" type="date" name="duedate" required /></div>
+      <div class="grid-item"><label for="description">Description</label></div>
+      <div class="grid-item"><textarea id="data-note-description" name="description" minlength="10"  required></textarea></div>
+      
+      <div class="grid-item"><label for="importance">Importance</label></div>
+      <div class="grid-item"><select name="importance" id="data-note-importance" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select></div>
 
-    <div class="grid-item"><label for="creation-date">CreationDate</label></div>
-    <div class="grid-item"><p id="data-note-creation-date" type="date" name="creation-date" readonly></p></div>
+      <div class="grid-item"><label for="due-date">DueDate</label></div>
+      <div class="grid-item"><input id="data-note-duedate" type="date" name="due-date" required /></div>
 
-    <div class="grid-item2"><button id="note-action" type="submit" data-action="addNote">Send</button></div>
+      <div class="grid-item"><label for="creation-date">CreationDate</label></div>
+      <div class="grid-item"><p id="data-note-creation-date" type="date" name="creation-date" readonly></p></div>
 
-  </form>
-   
+      <div class="grid-item2"><button id="note-action" type="submit" data-action="addNote">Send</button></div>
+
   </div>
+  </form>
   </section>
 
 
