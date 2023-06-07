@@ -12,9 +12,10 @@ export class NoteService {
         this.storage = storage || new NoteStorage();
         this.notes = [ ];
         this.latestId = 0;
+        this.#loadData();
     }
 
-    loadData() {
+    #loadData() {
         this.notes = this.storage.getAll().map(n => new Note(
                 n.id,
                 n.title, 
@@ -42,8 +43,7 @@ export class NoteService {
     }
 
     save() {
-        const jsonArray = this.notes.map(n => n.toJSON);
-        this.storage.saveAll(jsonArray); 
+        this.storage.saveAll(this.notes); 
     }
 
     addNote(title, description, importance, dueDate, isDone){
@@ -67,6 +67,7 @@ export class NoteService {
         if (importance != null) {  note.importance = importance } ;
         if (dueDate != null) {  note.dueDate = dueDate } ;
         if (isDone) { note.isDone = isDone};
+        this.storage.saveAll(this.notes);
     } 
 
     getNoteById(id){

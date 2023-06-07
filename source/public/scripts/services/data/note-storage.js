@@ -12,8 +12,9 @@ export class NoteStorage {
         return this.notes;
     }
 
-    saveAll() {
-        localStorage.setItem('noteStorage_v1', JSON.stringify(this.notes));
+    saveAll(notes) {
+        this.notes = notes;
+        localStorage.setItem('noteStorage_v1', JSON.stringify(notes));
         return this.notes;
     }
 }

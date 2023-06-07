@@ -54,8 +54,8 @@ class NoteController {
         
         if (noteAction === "updateNote"){
             debugger;
-            noteService.loadData();
-            const id = json.id;
+   
+            const id = Number( json.id );
             const title = json.title;
             const description = json.description;
             const importance = Number(json.importance);
@@ -64,7 +64,6 @@ class NoteController {
             noteService.editNote(id, title, description, importance, this.formatDateCHISO(dueDate), isDone);
         } if (noteAction === "addNote"){
             debugger; 
-            noteService.loadData();
             const title = json.title;
             const description = json.description;
             const importance = Number(json.importance);
@@ -96,12 +95,11 @@ class NoteController {
     }
 
     renderView() {
-        noteService.loadData();
+
         this.showNotes();
     }
 
     initialize() {
-        noteService.loadData();
         this.renderView(); 
     }
 }
