@@ -49,7 +49,7 @@ select {
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 1200;
   border-bottom: 1px solid #000;
 }
@@ -63,9 +63,9 @@ button {
   font-size: 13px;
 }
 
-button-small {
+.button-small {
   padding: 5px 10px;
-  font-size: 5px;
+  font-size: 10px;
 }
 
 section {
@@ -75,24 +75,32 @@ section {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
   padding: 10px;
+  gap: 10px;
 }
 
 .grid-container2 {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto ;
   padding: 10px;
+  gap: 10px;
 }
 
 .grid-item {
   padding: 20px;
-  text-align: right;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  text-align: left;
 }
 
 .grid-item2 {
   padding: 20px;
   text-align: right;
+  border: 1px solid rgba(0, 0, 0, 0.8);
   grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-end: 3;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
 }

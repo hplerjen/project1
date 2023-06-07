@@ -12,50 +12,43 @@
   <script id="note-list-template" type="text/x-handlebars-template"> 
     
     <div class="grid-container">
-
-      <div class="grid-item"><h2></h2></div>
       <div class="grid-item">
-        <h2>
-          <button class="button-small" id="title-sort-ASC" type="click" data-action="title-sort-ASC">ASC</button>
-          <button class="button-small" id="title-sort-DESC" type="click" data-action="title-sort-DESC">DESC</button>
-        </h2>
+        <h2>ID</h2>
+        <button class="button-small" id="id-sort-ASC" type="click" data-action="id-sort-ASC">ASC ></button>
+        <button class="button-small" id="id-sort-DESC" type="click" data-action="id-sort-DESC">DESC <</button>
       </div>
       <div class="grid-item">
-        <h2>
-          <button class="button-small" id="desc-sort-ASC" type="click" data-action="desc-sort-ASC">ASC</button>
-          <button class="button-small" id="desc-sort-DESC" type="click" data-action="desc-sort-DESC">DESC</button>
-        </h2>
+        <h2>Title</h2>
+        <button class="button-small" id="title-sort-ASC" type="click" data-action="title-sort-ASC">ASC ></button>
+        <button class="button-small" id="title-sort-DESC" type="click" data-action="title-sort-DESC">DESC <</button>
       </div>
-
       <div class="grid-item">
-        <h2>
-          <button class="button-small" id="imp-sort-ASC" type="click" data-action="imp-sort-ASC">ASC</button>
-          <button class="button-small" id="imp-sort-DESC" type="click" data-action="imp-sort-DESC">DESC</button>
-        </h2>
+        <h2>Description</h2> 
+        <p><button class="button-small" id="desc-sort-ASC" type="click" data-action="desc-sort-ASC">ASC ></button></p>
+        <p><button class="button-small" id="desc-sort-DESC" type="click" data-action="desc-sort-DESC">DESC <</button></p>
       </div>
-
       <div class="grid-item">
-        <h2>
-          <button class="button-small" id="ddate-sort-ASC" type="click" data-action="ddate-sort-ASC">ASC</button>
-          <button class="button-small" id="ddate-sort-DESC" type="click" data-action="ddate-sort-DESC">DESC</button>
-        </h2>
+        <h2>Importance</h2> 
+        <p><button class="button-small" id="imp-sort-ASC" type="click" data-action="imp-sort-ASC">ASC ></button></p>
+        <p><button class="button-small" id="imp-sort-DESC" type="click" data-action="imp-sort-DESC">DESC <</button></p>
       </div>
-
       <div class="grid-item">
-        <h2>
-          <button class="button-small" id="cdate-sort-ASC" type="click" data-action="cdate-sort-ASC">ASC</button>
-          <button class="button-small" id="cdate-sort-DESC" type="click" data-action="cdate-sort-DESC">DESC</button>
-        </h2>
+        <h2>Due Date</h2> 
+        <p><button class="button-small" id="ddate-sort-ASC" type="click" data-action="ddate-sort-ASC">ASC ></button></p>
+        <p><button class="button-small" id="ddate-sort-DESC" type="click" data-action="ddate-sort-DESC">DESC <</button></p>
       </div>
-      <div class="grid-item"><h2></h2></div>
-
-      <div class="grid-item"><h2>ID</h2></div>
-      <div class="grid-item"><h2>Title</h2></div>
-      <div class="grid-item"><h2>Description</h2> </div>
-      <div class="grid-item"><h2>Importance</h2> </div>
-      <div class="grid-item"><h2>Due Date</h2> </div>
-      <div class="grid-item"><h2>Creation Date</h2> </div>
-      <div class="grid-item"><h2>Action</h2> </div>
+      <div class="grid-item">
+        <h2>Creation Date</h2> 
+        <p><button class="button-small" id="cdate-sort-ASC" type="click" data-action="cdate-sort-ASC">ASC ></button></p>
+        <p><button class="button-small" id="cdate-sort-DESC" type="click" data-action="cdate-sort-DESC">DESC <</button></p>
+      </div>
+      <div class="grid-item">
+        <h2>Status</h2> 
+        <p><button class="button-small" id="status-filter-default" type="click" data-action="status-filter-default">All Tasks</button></p>
+        <p><button class="button-small" id="status-filter-open" type="click" data-action="status-filter-open">Only Open Tasks</button></p>
+      </div>
+      <div class="grid-item"><h2>Action</h2> 
+      </div>
     
       {{#each notes}}
     
@@ -63,9 +56,10 @@
       <div class="grid-item">{{title}}</div>
       <div class="grid-item">{{description}} </div>
       <div class="grid-item">{{importance}} </div>
-      <div class="grid-item">{{dueDate}}  </div>
+      <div class="grid-item">{{dueDate}} </div>
       <div class="grid-item">{{creationDate}} </div>
-      <div class="grid-item"><input type="button" value="Edit" data-note-id="{{id}}"></div>
+      <div class="grid-item">{{isDone}} </div>
+      <div class="grid-item"><input id="note-edit-button" type="button" value="Edit" data-note-id="{{id}}"></div>
     
     {{/each}}
 
@@ -101,7 +95,8 @@
     <div class="grid-container2">
 
       <div class="grid-item"><label for="id">ID</label></div>
-      <div class="grid-item"><p id="data-note-id" type="text" name="id" readonly></p></div>
+      <div class="grid-item"><p id="data-note-id-view" type="text" name="id-view" readonly></p>
+      <input type="hidden" id="data-note-id" name="id"></div>
       
       <div class="grid-item"><label for="title">Title</label></div>
       <div class="grid-item"><input id="data-note-title" type="text" name="title" required/></div>
@@ -118,15 +113,20 @@
         <option value="5">5</option>
       </select></div>
 
-      <div class="grid-item"><label for="due-date">DueDate</label></div>
-      <div class="grid-item"><input id="data-note-duedate" type="date" name="due-date" required /></div>
+      <div class="grid-item"><label for="duedate">DueDate (DD.MM.YYYY) </label></div>
+      <div class="grid-item"><input id="data-note-duedate" type="text" pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}" name="duedate" required /></div>
 
-      <div class="grid-item"><label for="creation-date">CreationDate</label></div>
-      <div class="grid-item"><p id="data-note-creation-date" type="date" name="creation-date" readonly></p></div>
+      <div class="grid-item"><label for="creation-date">CreationDate (DD.MM.YYYY)</label></div>
+      <div class="grid-item"><p id="data-note-creation-date" type="text" name="creation-date" readonly></p>
+        <input type="hidden" id="data-note-creation-date-hidden" name="creation-date-hidden"></div>
+
+      <div class="grid-item"><label for="isdone">is Done </label></div>
+      <div class="grid-item"><input id="data-note-isdone" type="checkbox" name="isdone"> </input></div>
 
       <div class="grid-item2"><button id="note-action" type="submit" data-action="addNote">Send</button></div>
 
   </div>
+
   </form>
   </section>
 
