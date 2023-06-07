@@ -14,7 +14,6 @@ class NoteController {
         this.noteTemplateCompiled = Handlebars.compile(document.getElementById('note-list-template').innerHTML);
         this.noteContainer = document.getElementById("note-list");
         this.noteContainer.addEventListener('click', (event) => {
-            debugger;
             if (event.target.id === "note-edit-button"){
                 const noteId = Number(event.target.dataset.noteId);
                 const note = noteService.getNoteById(noteId);
@@ -54,13 +53,12 @@ class NoteController {
         
         if (noteAction === "updateNote"){
             debugger;
-   
             const id = Number( json.id );
             const title = json.title;
             const description = json.description;
             const importance = Number(json.importance);
             const dueDate = json.duedate;
-            const isDone = json.isdone;
+            const isDone = Boolean(json.isdone);
             noteService.editNote(id, title, description, importance, this.formatDateCHISO(dueDate), isDone);
         } if (noteAction === "addNote"){
             debugger; 
@@ -68,7 +66,7 @@ class NoteController {
             const description = json.description;
             const importance = Number(json.importance);
             const dueDate = json.duedate;
-            const isDone = json.isdone;
+            const isDone = Boolean(json.isdone);
             noteService.addNote(title, description, importance, this.formatDateCHISO(dueDate), isDone);
         } else {
             //somethin went wrong

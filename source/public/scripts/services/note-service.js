@@ -22,7 +22,8 @@ export class NoteService {
                 n.description, 
                 n.importance,
                 n.creationDate,
-                n.duedate)
+                n.duedate,
+                n.isDone )
             
         );
         if (this.notes.length === 0) { // initial data feed
@@ -31,13 +32,15 @@ export class NoteService {
                 "Get her a present" , 
                 4,
                 new Date("2022-03-25"), 
-                new Date("2023-06-25") );
+                new Date("2023-06-25") ,
+                Boolean(true));
             this.addNote(
                     "Book of Brama" , 
                     "Purchase at amazon",
                     2,
                     new Date("2022-03-01"), 
-                    new Date("2023-06-23") );
+                    new Date("2023-06-23") ,
+                    Boolean(false));
             this.save();
         }
     }
@@ -47,16 +50,11 @@ export class NoteService {
     }
 
     addNote(title, description, importance, dueDate, isDone){
-        let isDoneFlag = false; 
-        if (isDone === false) {
-            isDoneFlag = false;
-        }
-        else if (typeof isDone !==  "undefined") {
-            isDoneFlag = true;
-        }
-        this.notes.push(new Note(
-            this.createId(), title, description, importance, new Date(), dueDate, isDoneFlag));
+        debugger;
+        let note = new Note(this.createId(), title, description, importance, new Date(), dueDate, isDone);
+        this.notes.push(note);
         this.notes.sort();
+        this.storage.saveAll(this.notes);
     }
 
     editNote(id, title, description, importance, dueDate, isDone){
@@ -75,6 +73,13 @@ export class NoteService {
     }
 
     createId(){
+        let notes = [];
+        if (this.notes.length > 1){
+            notes = this.notes;
+            //FIXME
+            //notes.sortIDDesc();
+            //notes[0].id
+        }
         this.latestId += 1; 
         return this.latestId;
     }
@@ -90,6 +95,14 @@ export class NoteService {
         return resultString;
     } 
 
+    getNotesSorted(){
+
+    }
+
+    getNotesFiltered(){
+        
+    }
+
 }
 
 
@@ -97,7 +110,7 @@ export class NoteService {
      sort & filter
 }*/
 
-    // getNote(orderBy, filterBy) // Notes aus dem Storage abrufen
+    //getNote(orderBy, filterBy) // Notes aus dem Storage abrufen
     //addNote(note) // neue Note in den Storage einfügen
     //updateNote(note) // Note im Storage aktualiseren
     //getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen
