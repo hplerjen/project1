@@ -22,50 +22,54 @@ export class NoteService {
                 n.description, 
                 n.importance,
                 n.creationDate,
-                n.duedate,
+                n.dueDate,
                 n.isDone )
             
         );
         if (this.notes.length === 0) { // initial data feed
             this.addNote(
-                "Mary's Birthday" , 
-                "Get her a present" , 
-                4,
-                new Date("2022-03-25"), 
-                new Date("2023-06-25") ,
-                Boolean(true));
-            this.addNote(
-                    "Book of Brama" , 
+                    "Book of Brama NEW" , 
                     "Purchase at amazon",
                     2,
-                    new Date("2022-03-01"), 
+                    new Date("1967-03-01"), 
                     new Date("2023-06-23") ,
                     Boolean(false));
-            this.save();
+            this.addNote(
+                        "Time to relax" , 
+                        "Rheinfelden SPA",
+                        5,
+                        new Date("1967-08-08"), 
+                        new Date("2023-06-25") ,
+                        Boolean(true));
         }
+        this.sortIdASC();
     }
 
     save() {
         this.storage.saveAll(this.notes); 
     }
 
-    addNote(title, description, importance, dueDate, isDone){
-        debugger;
-        let note = new Note(this.createId(), title, description, importance, new Date(), dueDate, isDone);
+    addNote(title, description, importance, creationDate, dueDate, isDone){
+        let note = new Note(
+            this.createId(), 
+            title, description, 
+            importance, 
+            creationDate, dueDate, 
+            isDone);
         this.notes.push(note);
-        this.notes.sort();
-        this.storage.saveAll(this.notes);
+        this.sortIdASC();
+        this.save();
     }
 
-    editNote(id, title, description, importance, dueDate, isDone){
-        debugger;
+    editNote(id, title, description, importance, creationDate, dueDate, isDone){
         const note = this.getNoteById(id);
-        if (title != null) {  note.title = title } ;
-        if (description != null) {  note.description = description } ;
-        if (importance != null) {  note.importance = importance } ;
-        if (dueDate != null) {  note.dueDate = dueDate } ;
-        if (isDone) { note.isDone = isDone};
-        this.storage.saveAll(this.notes);
+        note.title = title  ;
+        note.description = description;
+        note.importance = importance;
+        note.creationDate = creationDate;
+        note.dueDate = dueDate;
+        note.isDone = isDone;
+        this.save();
     } 
 
     getNoteById(id){
@@ -73,12 +77,14 @@ export class NoteService {
     }
 
     createId(){
-        let notes = [];
+        debugger;
         if (this.notes.length > 1){
-            notes = this.notes;
-            //FIXME
-            //notes.sortIDDesc();
-            //notes[0].id
+            this.sortIdDESC();
+            if (this.notes[0].id !== undefined){
+                this.latestId = this.notes[0].id;
+            } else {
+                this.latestId = 1;
+            }
         }
         this.latestId += 1; 
         return this.latestId;
@@ -95,13 +101,109 @@ export class NoteService {
         return resultString;
     } 
 
-    getNotesSorted(){
-
+    formatDateCHISO(swissDateStr){
+        debugger;
+        let day = swissDateStr.slice(0,2);
+        let month = swissDateStr.slice(3, 5);
+        let year = swissDateStr.slice(6, 10);
+        const date = new Date(year + "-" + month + "-" + day);
+        return date;
     }
 
-    getNotesFiltered(){
-        
+    sortIdASC(){
+        this.notes = this.notes.sort((a, b)=> a.id - b.id);
     }
+
+    sortIdDESC(){
+        this.notes = this.notes.sort((a, b)=> b.id - a.id);
+    }
+
+    sortTitleASC(){
+        this.notes = this.notes.sort((a, b)=>  {
+            if (a.title < b.title) {
+              return -1;
+            }
+            if (a.title > b.title) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+
+    sortTitleDESC(){
+        this.notes = this.notes.sort((a, b)=>  {
+            if (a.title > b.title) {
+              return -1;
+            }
+            if (a.title < b.title) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+
+    sortDescriptionASC(){
+        this.notes = this.notes.sort((a, b)=>  {
+            if (a.description < b.description) {
+              return -1;
+            }
+            if (a.description > b.description) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+
+    sortDescriptionDESC(){
+        this.notes = this.notes.sort((a, b)=>  {
+            if (a.description > b.description) {
+              return -1;
+            }
+            if (a.description < b.description) {
+              return 1;
+            }
+            return 0;
+          });
+    }
+
+    sortImportanceASC(){
+        this.notes = this.notes.sort((a, b)=> a.importance - b.importance);
+    }
+
+    sortImportanceDESC(){
+        this.notes = this.notes.sort((a, b)=> b.importance - a.importance);
+    }
+
+    sortDueDateASC(){
+        this.notes = this.notes.sort((a, b)=> new Date(a.dueDate) - new Date(b.dueDate));
+    }
+
+    sortDueDateDESC(){
+        this.notes = this.notes.sort((a, b)=> new Date(b.dueDate) - new Date(a.dueDate));
+    }
+
+    sortCreationDateASC(){
+        this.notes = this.notes.sort((a, b)=> new Date(a.creationDate) - new Date(b.creationDate));
+    }
+
+    sortCreationDateDESC(){
+        this.notes = this.notes.sort((a, b)=> new Date(b.creationDate) - new Date(a.creationDate));
+    }
+
+
+    
+
+    filterNO(){
+        //this.notes = this.notes.filter(note => note === note);
+    }
+
+    filterClosed(){
+        debugger;
+        this.notes = this.notes.filter(note => note.isDone === false);
+    }
+
+    
+
 
 }
 

@@ -5,7 +5,7 @@
   <title>Note App</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
-  <script src="scripts/index.js" type="module"></script> 
+  <script src="scripts/theme.js" type="module"></script> 
   <script src="scripts/controlers/note-controler.js" type="module"></script>
    
   <link rel="stylesheet" href="styles/index.css">
@@ -57,8 +57,8 @@
       </div>
       <div class="grid-item">
         <h2>Status</h2> 
-        <p><button class="button-small" id="status-filter-default" type="click" data-action="status-filter-default">All Tasks</button></p>
-        <p><button class="button-small" id="status-filter-open" type="click" data-action="status-filter-open">Only Open Tasks</button></p>
+        <p><button class="button-small" id="status-filter-default" type="click" data-action="status-filter-no">All Tasks</button></p>
+        <p><button class="button-small" id="status-filter-closed" type="click" data-action="status-filter-closed">Only Open Tasks</button></p>
       </div>
       <div class="grid-item"><h2>Action</h2> 
       </div>
@@ -129,9 +129,10 @@
       <div class="grid-item"><label for="duedate">DueDate (DD.MM.YYYY) </label></div>
       <div class="grid-item"><input id="data-note-duedate" type="text" pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}" name="duedate" required /></div>
 
-      <div class="grid-item"><label for="creation-date">CreationDate (DD.MM.YYYY)</label></div>
-      <div class="grid-item"><p id="data-note-creation-date" type="text" name="creation-date" readonly></p>
-        <input type="hidden" id="data-note-creation-date-hidden" name="creation-date-hidden"></div>
+      <div class="grid-item"><label for="creationdate">CreationDate (DD.MM.YYYY)</label></div>
+      <div class="grid-item">
+        <p id="data-note-creationdate" type="text" name="creationdate" readonly></p>
+        <input type="hidden" id="data-note-creationdatehidden" name="creationdatehidden"></div>
 
       <div class="grid-item"><label for="isdone">is Done </label></div>
       <div class="grid-item"><input id="data-note-isdone" type="checkbox" name="isdone"> </input></div>
