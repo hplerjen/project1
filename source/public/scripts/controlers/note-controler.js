@@ -88,11 +88,13 @@ class NoteController {
                 this.renderView(); 
             }  else if (event.target.id === "status-filter-default"){
                 debugger;
-                noteService.filterNO();
+                noteService.filterOn = false;
+                noteService.applyFilterOnView();
                 this.renderView();
             } else if (event.target.id === "status-filter-closed"){
                 debugger;
-                //noteService.filterClosed();
+                noteService.filterOn = true;
+                noteService.applyFilterOnView();
                 this.renderView();
             }
           
@@ -143,7 +145,7 @@ class NoteController {
     showNotes() {
         debugger;
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
-            {notes: noteService.notes},
+            {notes: noteService.notesView},
             {allowProtoPropertiesByDefault: true});
     }
 

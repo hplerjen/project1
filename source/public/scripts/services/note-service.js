@@ -11,6 +11,8 @@ export class NoteService {
     constructor(storage) {
         this.storage = storage || new NoteStorage();
         this.notes = [ ];
+        this.filterOn = false;
+        this.notesView = [ ];
         this.latestId = 0;
         this.#loadData();
     }
@@ -43,6 +45,7 @@ export class NoteService {
                         Boolean(true));
         }
         this.sortIdASC();
+        this.applyFilterOnView();
     }
 
     save() {
@@ -59,7 +62,16 @@ export class NoteService {
         this.notes.push(note);
         this.sortIdASC();
         this.save();
+        this.applyFilterOnView();
     }
+    
+    applyFilterOnView(){
+        if (this.filterOn === true){
+            this.notesView = this.notes.filter(note => note.isDone === false);
+        } else {
+            this.notesView = this.notes;
+        }
+    };
 
     editNote(id, title, description, importance, creationDate, dueDate, isDone){
         const note = this.getNoteById(id);
@@ -70,6 +82,7 @@ export class NoteService {
         note.dueDate = dueDate;
         note.isDone = isDone;
         this.save();
+        this.applyFilterOnView();
     } 
 
     getNoteById(id){
@@ -189,20 +202,6 @@ export class NoteService {
     sortCreationDateDESC(){
         this.notes = this.notes.sort((a, b)=> new Date(b.creationDate) - new Date(a.creationDate));
     }
-
-
-    
-
-    filterNO(){
-        //this.notes = this.notes.filter(note => note === note);
-    }
-
-    filterClosed(){
-        debugger;
-        this.notes = this.notes.filter(note => note.isDone === false);
-    }
-
-    
 
 
 }
