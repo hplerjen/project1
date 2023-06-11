@@ -155,7 +155,7 @@ export class NoteService {
           });
     }
 
-    sortDescriptionASC(){
+    sortDescriptionDESC(){
         this.notes = this.notes.sort((a, b)=>  {
             if (a.description < b.description) {
               return -1;
@@ -167,7 +167,7 @@ export class NoteService {
           });
     }
 
-    sortDescriptionDESC(){
+    sortDescriptionASC(){
         this.notes = this.notes.sort((a, b)=>  {
             if (a.description > b.description) {
               return -1;
