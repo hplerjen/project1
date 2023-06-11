@@ -1,13 +1,7 @@
-/* eslint-disable no-debugger */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable prefer-template */
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
-/* eslint-disable spaced-comment */
-import {NoteStorage} from './data/note-storage.js';
-import {Note} from './note.js';
+import NoteStorage from './data/note-storage.js';
+import Note from './note.js';
 
-export class NoteService {
+export default class NoteService {
     constructor(storage) {
         this.storage = storage || new NoteStorage();
         this.notes = [ ];
@@ -53,7 +47,7 @@ export class NoteService {
     }
 
     addNote(title, description, importance, creationDate, dueDate, isDone){
-        let note = new Note(
+        const note = new Note(
             this.createId(), 
             title, description, 
             importance, 
@@ -90,7 +84,6 @@ export class NoteService {
     }
 
     createId(){
-        debugger;
         if (this.notes.length > 1){
             this.sortIdDESC();
             if (this.notes[0].id !== undefined){
@@ -101,26 +94,6 @@ export class NoteService {
         }
         this.latestId += 1; 
         return this.latestId;
-    }
-
-
-    format(date){
-        let day = date.getDate();
-        if (day < 10) {day = "0" + day;}
-        let month = date.getMonth() + 1;
-        if (month < 10) {month = "0" + month;}
-        const year = date.getFullYear();
-        let resultString = day + '.' + month + '.' + year
-        return resultString;
-    } 
-
-    formatDateCHISO(swissDateStr){
-        debugger;
-        let day = swissDateStr.slice(0,2);
-        let month = swissDateStr.slice(3, 5);
-        let year = swissDateStr.slice(6, 10);
-        const date = new Date(year + "-" + month + "-" + day);
-        return date;
     }
 
     sortIdASC(){
@@ -202,23 +175,6 @@ export class NoteService {
     sortCreationDateDESC(){
         this.notes = this.notes.sort((a, b)=> new Date(b.creationDate) - new Date(a.creationDate));
     }
-
-
 }
-
-
-/*function getNote(orderBy, filterBy){
-     sort & filter
-}*/
-
-    //getNote(orderBy, filterBy) // Notes aus dem Storage abrufen
-    //addNote(note) // neue Note in den Storage einfügen
-    //updateNote(note) // Note im Storage aktualiseren
-    //getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen
-
-
-
-
-
 
 export const noteService = new NoteService();
