@@ -19,7 +19,5 @@ export default class Note {
             dueDate: this.dueDate,
             isDone: this.isDone
         };
-    }
-
-  
+    } 
 };

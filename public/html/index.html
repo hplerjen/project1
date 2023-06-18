@@ -5,12 +5,12 @@
   <title>Note App</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
-  <script src="scripts/theme.js" type="module"></script> 
-  <script src="scripts/controlers/note-controler.js" type="module"></script>
+  <script src="../js/utils/theme.js" type="module"></script> 
+  <script src="../js/controlers/index-controler.js" type="module"></script>
    
-  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="../css/index.css">
 
-  <script>
+   <script>
     Handlebars.registerHelper('formatDateCH', function(dateString) {
     return new Handlebars.SafeString(
     moment(dateString).format("DD.MM.YYYY").toUpperCase()
@@ -72,7 +72,10 @@
       <div class="grid-item">{{formatDateCH dueDate}} </div>
       <div class="grid-item">{{formatDateCH creationDate}} </div>
       <div class="grid-item">{{formatDone isDone}} </div>
-      <div class="grid-item"><input id="note-edit-button" type="button" value="Edit" data-note-id="{{id}}"></div>
+      <div class="grid-item">
+        <input id="note-edit-button" type="button" value="Edit" data-note-id="{{id}}">
+        <input id="note-delete-button" type="button" value="Delete" data-note-id="{{id}}">
+      </div>
     
     {{/each}}
 
@@ -83,11 +86,6 @@
 </head>
 <body>
   <header>
-    <!--<nav>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-      </ul>
-    </nav>-->
     <button type="button" id="theme-button">Toggle Darktheme</button>
   </header>
   
