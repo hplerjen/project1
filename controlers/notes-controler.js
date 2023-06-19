@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable class-methods-use-this */
 import {noteDBStore} from '../services/note-db-storage.js'
 
 export class NotesControler {
@@ -13,12 +11,10 @@ export class NotesControler {
     };
 
     readNote = async (req, res) => {
-        debugger;
         res.json(await noteDBStore.read(req.params.id));
     };
 
     updateNote = async (req, res) => {
-        debugger;
         res.json(await noteDBStore.update(req.params.id, req.body.note));
     };
 

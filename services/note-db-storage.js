@@ -3,7 +3,7 @@
 /* eslint-disable max-classes-per-file */
 import Datastore from 'nedb-promises'
 
-export class Note {
+/* export class Note {
     constructor(id, title, description, importance, creationDate, dueDate, isDone ) {
         this.id = id;
         this.title = title ;
@@ -13,7 +13,7 @@ export class Note {
         this.dueDate = dueDate ;
         this.isDone = isDone;
     }
-}
+} */
 
 export class NoteDBStore {
     constructor(db) {
@@ -22,7 +22,7 @@ export class NoteDBStore {
     }
 
     async all() {
-        return this.db.find({}).sort({ id: -1 }).exec();
+        return this.db.find({}).sort({ id: 1 }).exec();
     }
 
     async create(note) {

@@ -6,59 +6,53 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
   <script src="../js/utils/theme.js" type="module"></script> 
+  <script src="../js/utils/handlebars.js" type="module"></script> 
   <script src="../js/controlers/index-controler.js" type="module"></script>
    
   <link rel="stylesheet" href="../css/index.css">
 
-   <script>
+  <!--<script>
     Handlebars.registerHelper('formatDateCH', function(dateString) {
-    return new Handlebars.SafeString(
-    moment(dateString).format("DD.MM.YYYY").toUpperCase()
-    );
-    }); </script>
-
-  <script>
-  Handlebars.registerHelper('formatDone', function(isDone) {
-  return new Handlebars.SafeString(isDone? "Done" : "To Do");
-  }); </script>
+    return new Handlebars.SafeString(moment(dateString).format("DD.MM.YYYY").toUpperCase());}); 
+  </script>-->
 
   <script id="note-list-template" type="text/x-handlebars-template"> 
     
     <div class="grid-container">
       <div class="grid-item">
         <h2>ID</h2>
-        <button class="button-small" id="id-sort-ASC" type="click" data-action="id-sort-ASC">ASC ></button>
-        <button class="button-small" id="id-sort-DESC" type="click" data-action="id-sort-DESC">DESC <</button>
+        <button class="button-small" id="id-sort-ASC"  type="click" data-sort = "ASC"  data-field="id">ASC ></button>
+        <button class="button-small" id="id-sort-DESC" type="click" data-sort = "DESC" data-field="id">DESC <</button>
       </div>
       <div class="grid-item">
         <h2>Title</h2>
-        <button class="button-small" id="title-sort-ASC" type="click" data-action="title-sort-ASC">ASC ></button>
-        <button class="button-small" id="title-sort-DESC" type="click" data-action="title-sort-DESC">DESC <</button>
+        <button class="button-small" id="title-sort-ASC" type="click" data-sort = "ASC" data-field="title">ASC ></button>
+        <button class="button-small" id="title-sort-DESC" type="click" data-sort = "DESC" data-field="title">DESC <</button>
       </div>
       <div class="grid-item">
         <h2>Description</h2> 
-        <p><button class="button-small" id="desc-sort-ASC" type="click" data-action="desc-sort-ASC">ASC ></button></p>
-        <p><button class="button-small" id="desc-sort-DESC" type="click" data-action="desc-sort-DESC">DESC <</button></p>
+        <p><button class="button-small" id="desc-sort-ASC" type="click"  data-sort = "ASC"  data-field="description">ASC ></button></p>
+        <p><button class="button-small" id="desc-sort-DESC" type="click" data-sort = "DESC" data-field="description">DESC <</button></p>
       </div>
       <div class="grid-item">
         <h2>Importance</h2> 
-        <p><button class="button-small" id="imp-sort-ASC" type="click" data-action="imp-sort-ASC">ASC ></button></p>
-        <p><button class="button-small" id="imp-sort-DESC" type="click" data-action="imp-sort-DESC">DESC <</button></p>
+        <p><button class="button-small" id="imp-sort-ASC" type="click"  data-sort = "ASC"  data-field="importance">ASC ></button></p>
+        <p><button class="button-small" id="imp-sort-DESC" type="click" data-sort = "desc-sort-ASC" data-field="importance">DESC <</button></p>
       </div>
       <div class="grid-item">
         <h2>Due Date</h2> 
-        <p><button class="button-small" id="ddate-sort-ASC" type="click" data-action="ddate-sort-ASC">ASC ></button></p>
-        <p><button class="button-small" id="ddate-sort-DESC" type="click" data-action="ddate-sort-DESC">DESC <</button></p>
+        <p><button class="button-small" id="ddate-sort-ASC" type="click"  data-sort = "ASC"  data-field="dueDate">ASC ></button></p>
+        <p><button class="button-small" id="ddate-sort-DESC" type="click" data-sort = "DESC" data-field="dueDate">DESC <</button></p>
       </div>
       <div class="grid-item">
         <h2>Creation Date</h2> 
-        <p><button class="button-small" id="cdate-sort-ASC" type="click" data-action="cdate-sort-ASC">ASC ></button></p>
-        <p><button class="button-small" id="cdate-sort-DESC" type="click" data-action="cdate-sort-DESC">DESC <</button></p>
+        <p><button class="button-small" id="cdate-sort-ASC" type="click"  data-sort = "ASC"  data-field="creationDate">ASC ></button></p>
+        <p><button class="button-small" id="cdate-sort-DESC" type="click" data-sort = "DESC" data-field="creationDate">DESC <</button></p>
       </div>
       <div class="grid-item">
         <h2>Status</h2> 
-        <p><button class="button-small" id="status-filter-default" type="click" data-action="status-filter-no">All Tasks</button></p>
-        <p><button class="button-small" id="status-filter-closed" type="click" data-action="status-filter-closed">Only Open Tasks</button></p>
+        <p><button class="button-small" id="status-filter-default" type="click" data-sort = "FILTER-OFF" data-field="isDone">All Tasks</button></p>
+        <p><button class="button-small" id="status-filter-closed" type="click"  data-sort = "FILTER-ON"  data-field="isDone">Only Open Tasks</button></p>
       </div>
       <div class="grid-item"><h2>Action</h2> 
       </div>

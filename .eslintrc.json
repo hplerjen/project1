@@ -18,7 +18,9 @@
     "import/extensions": "off",
     "object-curly-newline": "off",
     "object-curly-spacing": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "class-methods-use-this": "off",
+    "prefer-default-export" : "off"
   },
   "globals": {
     "Handlebars": "readonly"
