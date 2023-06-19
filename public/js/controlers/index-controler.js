@@ -18,7 +18,7 @@ export default class IndexControler {
     }
 
     async showNotes() {
-        // FIXME sort() funktioniert dieser code nicht mehr, wichtig für die Sortierung
+        // FIXME mit sort() funktioniert dieser code nicht mehr, wichtig für die Sortierung
         const notes = await noteRESTService.getNotes();
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
             {notes},
@@ -74,7 +74,7 @@ export default class IndexControler {
 
     }
 
-    // FIXME currently not used
+    // FIXME currently not used yet
     createNoteFromJSON(id, json, creationDateInput){
         const {title} = json;
         const {description} = json;
