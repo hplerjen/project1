@@ -19,13 +19,13 @@ export default class ListSortFilterUtility {
         } else if (field === "isDone" && sort === "FILTER-OFF"){
             this.notesView = notes;
         } else if (field === "id"){
-            this.sortCriteriaString(field, sort);   
+            this.sortCriteriaNumber(field, sort);   
         } else if (field === "title" ){
             this.sortCriteriaString(field, sort);
         } else if (field === "description" ){
             this.sortCriteriaString(field, sort);
         } else if (field === "importance" ){
-            this.sortCriteriaSting(field, sort);
+            this.sortCriteriaNumber(field, sort);
         } else if (field === "creationDate" ){
             this.sortCriteriaDate(field, sort);
         } else if (field === "dueDate"){
@@ -48,14 +48,14 @@ export default class ListSortFilterUtility {
         });
     };
 
-    // FIXME does not work
+    // FIXME does not work as on local
     sortCriteriaNumber(param, direction) {
         direction === "ASC"? 
         this.notesView.sort((a, b) => { Number (a[param]) - Number (b[param]) })
         : this.notesView.sort((a, b) => { Number (b[param]) - Number(a[param]) }); 
     };
 
-    // FIXME does not work
+    // FIXME does not work as on local
     sortCriteriaDate(param, direction) {
         direction === "ASC"? 
         this.notesView.sort((a, b) => { new Date(a[param]) - new Date(b[param]) })
