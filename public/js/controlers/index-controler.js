@@ -18,7 +18,6 @@ export default class IndexControler {
     }
 
     async showNotes() {
-        // FIXME mit sort() funktioniert dieser code nicht mehr, wichtig für die Sortierung
         const notes = await noteRESTService.getNotes();
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
             {notes},
@@ -41,6 +40,7 @@ export default class IndexControler {
     }
 
     async handleSortFilter(event){
+        // FIXME dem sort() funktioniert die List nicht mehr
         const sorted = await listSortFilterUtility.handleOrderFilter(event); 
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {sorted},
