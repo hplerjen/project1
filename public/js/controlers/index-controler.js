@@ -43,13 +43,14 @@ export default class IndexControler {
         // FIXME dem sort() funktioniert die List nicht mehr
         const sorted = await listSortFilterUtility.handleOrderFilter(event); 
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
-                {sorted},
+                {notes : sorted},
                 {allowProtoPropertiesByDefault: true});
     }
 
     handleEditForm(){
                 this.noteForm = document.getElementById("note-form");
                 this.noteForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
                     const noteAction = document.activeElement.dataset.action;
                     const data = new FormData(event.target);
                     const json = Object.fromEntries(data.entries());
