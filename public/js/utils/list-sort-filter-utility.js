@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
 import {noteRESTService}  from '../services/note-REST-service.js';
 
 export default class ListSortFilterUtility {
@@ -48,20 +45,26 @@ export default class ListSortFilterUtility {
         });
     };
 
-    // FIXME does not work as on local
     sortCriteriaNumber(param, direction) {
         direction === "ASC"? 
-        this.notesView.sort((a, b) => { Number (a[param]) - Number (b[param]) })
-        : this.notesView.sort((a, b) => { Number (b[param]) - Number(a[param]) }); 
+        this.notesView.sort((a, b) => { 
+           return Number(a[param]) - Number (b[param]);
+        })
+        : this.notesView.sort((a, b) => { 
+            return Number (b[param]) - Number (a[param]);
+        })
     };
 
-    // FIXME does not work as on local
     sortCriteriaDate(param, direction) {
-        direction === "ASC"? 
-        this.notesView.sort((a, b) => { new Date(a[param]) - new Date(b[param]) })
-        : this.notesView.sort((a, b) => { new Date(b[param]) - new Date(a[param]) }); 
+        if (direction === "ASC"){
+            this.notesView.sort((a, b) =>  {  
+                return new Date(a[param]) - new Date(b[param])});  
+        } else {
+            this.notesView.sort((a, b) => {  
+            return new Date(b[param]) - new Date(a[param])}); 
     };
-
+    
+}
 }
 
 export const listSortFilterUtility = new ListSortFilterUtility();

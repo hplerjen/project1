@@ -4,7 +4,6 @@ import {listSortFilterUtility} from '../utils/list-sort-filter-utility.js'
 
 export default class IndexControler {
     constructor() {  
-        this.notes = [];
         this.handleList();      
         this.handleEditForm();       
     }
@@ -40,7 +39,6 @@ export default class IndexControler {
     }
 
     async handleSortFilter(event){
-        // FIXME dem sort() funktioniert die List nicht mehr
         const sorted = await listSortFilterUtility.handleOrderFilter(event); 
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {notes : sorted},
@@ -50,22 +48,15 @@ export default class IndexControler {
     handleEditForm(){
                 this.noteForm = document.getElementById("note-form");
                 this.noteForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
+                    // event.preventDefault();
                     const noteAction = document.activeElement.dataset.action;
                     const data = new FormData(event.target);
                     const json = Object.fromEntries(data.entries());
                     
                     if (noteAction === "updateNote"){
-                        // FIXME this code schmiert ab
-                        /* const creationDate = json.creationdatehidden;
-                        const note = this.createNoteFromJSON(Number( json.id ), json, creationDate);
-                        await noteRESTService.updateNote(note.id, note);  */
                         await this.handleUpdate(json);
                         
-                    } if (noteAction === "addNote"){ 
-                        // FIXME this code schmiert ab
-                        /* const note = this.createNoteFromJSON(await this.createId(), json, new Date()) 
-                        await noteRESTService.createNote(note); */
+                    } if (noteAction === "addNote"){  
                         await this.handleCreate(json);
                     } 
                     // reset view
@@ -90,6 +81,7 @@ export default class IndexControler {
         return note;
     }
 
+    // FIXME remove id from logic 
     async createId(){
         let nextId = 1;
         const notes = await noteRESTService.getNotes();
@@ -134,8 +126,6 @@ export default class IndexControler {
     async handleEdit(event){
         const id = Number(event.target.dataset.noteId);
         const note = await noteRESTService.readNote(id);
-        // const notes = await noteRESTService.getNotes();
-        // const note = notes.find((notev2) => notev2.id === id );
         document.getElementById("note-edit-title").innerHTML = "Note Edit";
         const actionElement = document.getElementById("note-action");
         actionElement.setAttribute("data-action" , "updateNote") ;

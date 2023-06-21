@@ -20,7 +20,12 @@
     "object-curly-spacing": "off",
     "linebreak-style": "off",
     "class-methods-use-this": "off",
-    "prefer-default-export" : "off"
+    "prefer-default-export" : "off",
+    "no-unused-expressions" : "off",
+    "no-unused-vars": "off",
+    "array-callback-return": "off",
+    "arrow-body-style": "off",
+    "no-undef": "off"
   },
   "globals": {
     "Handlebars": "readonly"
