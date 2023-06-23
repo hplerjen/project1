@@ -1,11 +1,10 @@
-/* eslint-disable object-shorthand */
 /* eslint-disable no-debugger */
+/* eslint-disable object-shorthand */
 /* eslint-disable max-classes-per-file */
 import Datastore from 'nedb-promises'
 
-/* export class Note {
-    constructor(id, title, description, importance, creationDate, dueDate, isDone ) {
-        this.id = id;
+class Note {
+    constructor(title, description, importance, creationDate, dueDate, isDone ) {
         this.title = title ;
         this.description = description;
         this.importance = importance;
@@ -13,7 +12,7 @@ import Datastore from 'nedb-promises'
         this.dueDate = dueDate ;
         this.isDone = isDone;
     }
-} */
+} 
 
 export class NoteDBStore {
     constructor(db) {
@@ -25,17 +24,26 @@ export class NoteDBStore {
         return this.db.find({}).sort({ id: 1 }).exec();
     }
 
-    async create(note) {
+    async create(noteIn) {
+        const note = new Note(
+            noteIn.title,
+            noteIn.description,
+            noteIn.importance,
+            noteIn.creationDate,
+            noteIn.dueDate,
+            noteIn.isDone
+        );
         return this.db.insert(note);
     }
 
     async read(_id) {
-        return this.db.findOne({id: Number(_id)});
+        debugger;
+        return this.db.findOne({_id: _id});
     }
 
     async update(_id, note) {
         debugger;
-        return this.db.update({id: Number(_id)} , {$set: 
+        return this.db.update({_id: _id} , {$set: 
              {"title": note.title, 
               "description": note.description,
               "importance": note.importance,
@@ -46,8 +54,7 @@ export class NoteDBStore {
     }
 
     async delete(_id) {
-        debugger;
-        return this.db.remove({ id: Number(_id)}, {}, () => {});
+        return this.db.remove({_id: Number(_id)}, {}, () => {});
     }
 
 }

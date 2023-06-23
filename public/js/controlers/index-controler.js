@@ -1,5 +1,9 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-debugger */
+/* eslint-disable object-shorthand */
 import {noteRESTService}  from '../services/note-REST-service.js';
-import Note from '../services/note.js';
+// import Note from '../services/note.js';
 import {listSortFilterUtility} from '../utils/list-sort-filter-utility.js' 
 
 export default class IndexControler {
@@ -18,6 +22,7 @@ export default class IndexControler {
 
     async showNotes() {
         const notes = await noteRESTService.getNotes();
+        debugger;
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
             {notes},
             {allowProtoPropertiesByDefault: true});
@@ -66,8 +71,8 @@ export default class IndexControler {
 
     }
 
-    // FIXME currently not used yet
-    createNoteFromJSON(id, json, creationDateInput){
+    // FIXME remove
+    /* createNoteFromJSON(id, json, creationDateInput){
         const {title} = json;
         const {description} = json;
         const importance = Number(json.importance);
@@ -79,10 +84,11 @@ export default class IndexControler {
             IndexControler.formatDateCHISO(dueDate), 
             isDone)
         return note;
-    }
+    } */
 
-    // FIXME remove id from logic 
-    async createId(){
+    // FIXME Remove
+    
+    /* async createId(){
         let nextId = 1;
         const notes = await noteRESTService.getNotes();
         if (notes.length > 0){
@@ -90,7 +96,7 @@ export default class IndexControler {
                 nextId = Number(sorted.pop().id) + 1;
         }
         return nextId;
-    }
+    } */
 
 
     async handleCreate(json){
@@ -99,47 +105,63 @@ export default class IndexControler {
         const importance = Number(json.importance);
         const dueDate = json.duedate;
         const isDone = Boolean(json.isdone);
-        await noteRESTService.createNote(
-            new Note(
-                await this.createId(),
-                title, description, importance, 
-                new Date(), 
-                IndexControler.formatDateCHISO(dueDate), 
-                isDone)); 
+        
+        // FIXME Review - move class - Date mapping logic to Server
+        
+        const note = {
+            title: title, 
+            description: description , 
+            importance: importance, 
+            creationDate: new Date(),
+            dueDate: IndexControler.formatDateCHISO(dueDate),
+            isDone: isDone
+        };
+        
+        await noteRESTService.createNote(note); 
     } 
     
     async handleUpdate(json){
-        const id = Number( json.id );
+        debugger;
+        const id = json.id;
         const {title} = json;
         const {description} = json;
         const importance = Number(json.importance);
         const creationDate = json.creationdatehidden;
         const dueDate = json.duedate;
         const isDone = Boolean(json.isdone);
-        await noteRESTService.updateNote(id, 
-            new Note(id, title, description, importance, 
-            IndexControler.formatDateCHISO(creationDate),
-            IndexControler.formatDateCHISO(dueDate), 
-            isDone)); 
+        
+        // FIXME Review - move class - Date mapping logic to Server 
+
+        const note = {
+            title: title, 
+            description: description , 
+            importance: importance, 
+            creationDate: IndexControler.formatDateCHISO(creationDate),
+            dueDate: IndexControler.formatDateCHISO(dueDate),
+            isDone: isDone
+        };
+
+        await noteRESTService.updateNote(id, note); 
     }
 
     async handleEdit(event){
-        const id = Number(event.target.dataset.noteId);
+        const id = event.target.dataset.noteId;
+        debugger;
         const note = await noteRESTService.readNote(id);
         document.getElementById("note-edit-title").innerHTML = "Note Edit";
         const actionElement = document.getElementById("note-action");
         actionElement.setAttribute("data-action" , "updateNote") ;
         actionElement.innerHTML = "Update";
-        document.getElementById("data-note-id-view").innerHTML = note.id;
-        document.getElementById("data-note-id").value = note.id;
+        document.getElementById("data-note-id-view").innerHTML = note._id;
+        document.getElementById("data-note-id").value = note._id;
         document.getElementById("data-note-title").value = note.title;
         document.getElementById("data-note-description").value = note.description;
-        document.getElementById("data-note-importance").value = note.importance;
+        document.getElementById("data-note-importance").value = Number(note.importance);
         document.getElementById("data-note-duedate").value = IndexControler.format(new Date(note.dueDate));
         document.getElementById("data-note-creationdate").innerHTML = IndexControler.format(new Date(note.creationDate));
         document.getElementById("data-note-creationdatehidden").value = IndexControler.format(new Date(note.creationDate));
         const isdone = document.getElementById("data-note-isdone");     
-        isdone.checked  = note.isDone;
+        isdone.checked  = Boolean(note.isDone);
     }
 
     async handleDelete(event){

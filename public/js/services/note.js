@@ -1,3 +1,4 @@
+// FIXME Review - NO LOGIC, OBJECT SUFFICENT 
 export default class Note {
     constructor(id, title, description, importance, creationDate, dueDate, isDone ) {
         this.id = id;

@@ -15,10 +15,10 @@
     
     <div class="grid-container">
       <div class="grid-item">
-        <h2>ID</h2>
+        <h2>_ID</h2>
         <button class="button-small" id="id-sort-ASC"  type="click" data-sort = "ASC"  data-field="id">ASC ></button>
         <button class="button-small" id="id-sort-DESC" type="click" data-sort = "DESC" data-field="id">DESC <</button>
-      </div>
+      </div> 
       <div class="grid-item">
         <h2>Title</h2>
         <button class="button-small" id="title-sort-ASC" type="click" data-sort = "ASC" data-field="title">ASC ></button>
@@ -49,12 +49,12 @@
         <p><button class="button-small" id="status-filter-default" type="click" data-sort = "FILTER-OFF" data-field="isDone">All Tasks</button></p>
         <p><button class="button-small" id="status-filter-closed" type="click"  data-sort = "FILTER-ON"  data-field="isDone">Only Open Tasks</button></p>
       </div>
-      <div class="grid-item"><h2>Action</h2> 
-      </div>
+      
+      <div class="grid-item"><h2>Action</h2> </div>
     
       {{#each notes}}
     
-      <div class="grid-item">{{id}}</div>
+      <div class="grid-item">{{_id}}</div>
       <div class="grid-item">{{title}}</div>
       <div class="grid-item">{{description}} </div>
       <div class="grid-item">{{importance}} </div>
@@ -62,8 +62,8 @@
       <div class="grid-item">{{formatDateCH creationDate}} </div>
       <div class="grid-item">{{formatDone isDone}} </div>
       <div class="grid-item">
-        <input id="note-edit-button" type="button" value="Edit" data-note-id="{{id}}">
-        <input id="note-delete-button" type="button" value="Delete" data-note-id="{{id}}">
+        <input id="note-edit-button" type="button" value="Edit" data-note-id="{{_id}}">
+        <input id="note-delete-button" type="button" value="Delete" data-note-id="{{_id}}">
       </div>
     
     {{/each}}
@@ -81,23 +81,18 @@
 <main>
   <h1>Note App (CAS FEE Project 1 v2) </h1>
   
-  <section id="note-list">
-
-  </section>
-
+  <section id="note-list"></section>
+  
   <section id="note-edit">
-
    <h1 id="note-edit-title">Note Create</h1>
-
-
    <form id="note-form">
- 
-    <div class="grid-container2">
-
+   <div class="grid-container2">
       <div class="grid-item"><label for="id">ID</label></div>
-      <div class="grid-item"><p id="data-note-id-view" type="text" name="id-view" readonly></p>
-      <input type="hidden" id="data-note-id" name="id"></div>
-      
+      <div class="grid-item">
+        <p id="data-note-id-view" type="text" name="id-view" readonly></p>
+        <input type="hidden" id="data-note-id" name="id">
+      </div>
+
       <div class="grid-item"><label for="title">Title</label></div>
       <div class="grid-item"><input id="data-note-title" type="text" name="title" required/></div>
 
