@@ -1,13 +1,15 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-alert */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-debugger */
 /* eslint-disable object-shorthand */
 import {noteRESTService}  from '../services/note-REST-service.js';
-// import Note from '../services/note.js';
 import {listSortFilterUtility} from '../utils/list-sort-filter-utility.js' 
+import Navigation from '../utils/navigation.js' 
 
 export default class IndexControler {
-    constructor() {  
+    constructor() { 
+        this.handleTopNavigation();
         this.handleList();      
         this.handleEditForm();       
     }
@@ -17,15 +19,20 @@ export default class IndexControler {
     }
 
     renderView() {
-        this.showNotes();
+        this.handleSortFilter();
     }
 
-    async showNotes() {
-        const notes = await noteRESTService.getNotes();
-        debugger;
-        this.noteContainer.innerHTML = this.noteTemplateCompiled(
-            {notes},
-            {allowProtoPropertiesByDefault: true});
+    handleTopNavigation(){
+        const showNoteList = document.getElementById("note-list");
+        const editNoteForm = document.getElementById("note-edit");
+        const createNoteButton = document.getElementById("note-create-button");
+        createNoteButton.addEventListener("click", () => {
+            Navigation.toggleViewModeToEdit(true);
+        });
+        const showNoteListButton = document.getElementById("note-list-button");
+        showNoteListButton.addEventListener("click", () => {
+            Navigation.toggleViewModeToEdit();
+        });
     }
 
     handleList(){
@@ -42,12 +49,13 @@ export default class IndexControler {
             } 
         });
     }
-
+ 
     async handleSortFilter(event){
-        const sorted = await listSortFilterUtility.handleOrderFilter(event); 
+        const sorted = await listSortFilterUtility.handleSortFilter(event); 
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {notes : sorted},
                 {allowProtoPropertiesByDefault: true});
+        Navigation.toggleViewModeToEdit(false);
     }
 
     handleEditForm(){
@@ -71,43 +79,13 @@ export default class IndexControler {
 
     }
 
-    // FIXME remove
-    /* createNoteFromJSON(id, json, creationDateInput){
-        const {title} = json;
-        const {description} = json;
-        const importance = Number(json.importance);
-        const creationDate = creationDateInput;
-        const dueDate = json.duedate;
-        const isDone = Boolean(json.isdone);
-        const note =  new Note(id, title, description, importance, 
-            IndexControler.formatDateCHISO(creationDate),
-            IndexControler.formatDateCHISO(dueDate), 
-            isDone)
-        return note;
-    } */
-
-    // FIXME Remove
-    
-    /* async createId(){
-        let nextId = 1;
-        const notes = await noteRESTService.getNotes();
-        if (notes.length > 0){
-                const sorted = [...notes].sort((a, b)=> a.id - b.id);
-                nextId = Number(sorted.pop().id) + 1;
-        }
-        return nextId;
-    } */
-
-
     async handleCreate(json){
         const {title} = json;
         const {description} = json;
         const importance = Number(json.importance);
         const dueDate = json.duedate;
         const isDone = Boolean(json.isdone);
-        
-        // FIXME Review - move class - Date mapping logic to Server
-        
+            
         const note = {
             title: title, 
             description: description , 
@@ -115,38 +93,12 @@ export default class IndexControler {
             creationDate: new Date(),
             dueDate: IndexControler.formatDateCHISO(dueDate),
             isDone: isDone
-        };
-        
-        await noteRESTService.createNote(note); 
+        };  
+        await noteRESTService.createNote(note);
     } 
-    
-    async handleUpdate(json){
-        debugger;
-        const id = json.id;
-        const {title} = json;
-        const {description} = json;
-        const importance = Number(json.importance);
-        const creationDate = json.creationdatehidden;
-        const dueDate = json.duedate;
-        const isDone = Boolean(json.isdone);
-        
-        // FIXME Review - move class - Date mapping logic to Server 
-
-        const note = {
-            title: title, 
-            description: description , 
-            importance: importance, 
-            creationDate: IndexControler.formatDateCHISO(creationDate),
-            dueDate: IndexControler.formatDateCHISO(dueDate),
-            isDone: isDone
-        };
-
-        await noteRESTService.updateNote(id, note); 
-    }
 
     async handleEdit(event){
         const id = event.target.dataset.noteId;
-        debugger;
         const note = await noteRESTService.readNote(id);
         document.getElementById("note-edit-title").innerHTML = "Note Edit";
         const actionElement = document.getElementById("note-action");
@@ -162,11 +114,36 @@ export default class IndexControler {
         document.getElementById("data-note-creationdatehidden").value = IndexControler.format(new Date(note.creationDate));
         const isdone = document.getElementById("data-note-isdone");     
         isdone.checked  = Boolean(note.isDone);
+        Navigation.toggleViewModeToEdit(true);
+    }
+    
+    async handleUpdate(json){
+        const id = json.id;
+        const {title} = json;
+        const {description} = json;
+        const importance = Number(json.importance);
+        const creationDate = json.creationdatehidden;
+        const dueDate = json.duedate;
+        const isDone = Boolean(json.isdone);
+        
+        const note = {
+            title: title, 
+            description: description , 
+            importance: importance, 
+            creationDate: IndexControler.formatDateCHISO(creationDate),
+            dueDate: IndexControler.formatDateCHISO(dueDate),
+            isDone: isDone
+        };
+        await noteRESTService.updateNote(id, note); 
     }
 
     async handleDelete(event){
-        const id = Number(event.target.dataset.noteId);
-        await noteRESTService.deleteNote(id);
+        const doDelete = confirm("Do you really want to delete this note?");
+        if (doDelete) {
+            const id = event.target.dataset.noteId;
+            await noteRESTService.deleteNote(id);
+            alert("Delete Note successfully");
+        }
         this.renderView();
     }
 
@@ -188,7 +165,6 @@ export default class IndexControler {
         return date;
     }
 
-                      
 }
 
 // singleton 

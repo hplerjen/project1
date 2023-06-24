@@ -1,6 +1,7 @@
+/* eslint-disable no-debugger */
 import { httpService } from './http-service.js'
 
-class NoteRESTService {
+export class NoteRESTService {
     
     async getNotes() {
         return httpService.ajax("GET", "/notes/", undefined);
@@ -19,9 +20,9 @@ class NoteRESTService {
     }
 
     async deleteNote(id) {
+        debugger;
         return httpService.ajax("DELETE", `/notes/${id}`, undefined);
-    }
+    } 
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const noteRESTService = new NoteRESTService();

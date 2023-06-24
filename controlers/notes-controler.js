@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import {noteDBStore} from '../services/note-db-storage.js'
 
 export class NotesControler {
@@ -19,6 +20,7 @@ export class NotesControler {
     };
 
     deleteOrder = async (req, res) => {
+        debugger;
         res.json(await noteDBStore.delete(req.params.id));
     };
 

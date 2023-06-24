@@ -42,7 +42,6 @@ export class NoteDBStore {
     }
 
     async update(_id, note) {
-        debugger;
         return this.db.update({_id: _id} , {$set: 
              {"title": note.title, 
               "description": note.description,
@@ -54,7 +53,8 @@ export class NoteDBStore {
     }
 
     async delete(_id) {
-        return this.db.remove({_id: Number(_id)}, {}, () => {});
+        debugger;
+        return this.db.remove({_id: _id}, {}, () => {});
     }
 
 }

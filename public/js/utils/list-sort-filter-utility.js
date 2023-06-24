@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import {noteRESTService}  from '../services/note-REST-service.js';
 
 export default class ListSortFilterUtility {
@@ -7,21 +6,23 @@ export default class ListSortFilterUtility {
         this.notesView = [];
     }
 
-    async handleOrderFilter(event){
+    async handleSortFilter(event){
         const {sort} = document.activeElement.dataset;
         const {field} = document.activeElement.dataset;
-        debugger;
 
-        // FIXME is this effort needed?
+        // load note list from service
         const notes = await noteRESTService.getNotes();
         this.notesView = [...notes];
+        
         if (field === "isDone" && sort === "FILTER-ON"){
             this.notesView = this.notesView.filter(note => note.isDone === false);
         } else if (field === "isDone" && sort === "FILTER-OFF"){
             this.notesView = notes;
+        
+        // FIXME remove after finnish
         } else if (field === "id"){ 
-            debugger;
-            this.sortCriteriaString(field, sort);   
+            this.sortCriteriaString(field, sort); 
+
         } else if (field === "title" ){
             this.sortCriteriaString(field, sort);
         } else if (field === "description" ){
@@ -29,12 +30,14 @@ export default class ListSortFilterUtility {
         } else if (field === "importance" ){
             this.sortCriteriaNumber(field, sort);
         } else if (field === "creationDate" ){
-            debugger;
             this.sortCriteriaDate(field, sort);
         } else if (field === "dueDate"){
-            debugger;
             this.sortCriteriaDate(field, sort);
+        } else {
+            // default sort
+           this.sortCriteriaDate("dueDate", "DESC");
         }
+
         return this.notesView;
     }
 
