@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { httpService } from './http-service.js'
 
 export class NoteRESTService {
@@ -20,7 +19,6 @@ export class NoteRESTService {
     }
 
     async deleteNote(id) {
-        debugger;
         return httpService.ajax("DELETE", `/notes/${id}`, undefined);
     } 
 }

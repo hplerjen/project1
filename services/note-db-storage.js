@@ -1,18 +1,5 @@
-/* eslint-disable no-debugger */
-/* eslint-disable object-shorthand */
-/* eslint-disable max-classes-per-file */
 import Datastore from 'nedb-promises'
-
-class Note {
-    constructor(title, description, importance, creationDate, dueDate, isDone ) {
-        this.title = title ;
-        this.description = description;
-        this.importance = importance;
-        this.creationDate = creationDate;
-        this.dueDate = dueDate ;
-        this.isDone = isDone;
-    }
-} 
+import Note from './note.js'
 
 export class NoteDBStore {
     constructor(db) {
@@ -37,7 +24,6 @@ export class NoteDBStore {
     }
 
     async read(_id) {
-        debugger;
         return this.db.findOne({_id: _id});
     }
 
@@ -53,7 +39,6 @@ export class NoteDBStore {
     }
 
     async delete(_id) {
-        debugger;
         return this.db.remove({_id: _id}, {}, () => {});
     }
 

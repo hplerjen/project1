@@ -1,8 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-alert */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable object-shorthand */
 import {noteRESTService}  from '../services/note-REST-service.js';
 import {listSortFilterUtility} from '../utils/list-sort-filter-utility.js' 
 import Navigation from '../utils/navigation.js' 
@@ -23,16 +18,32 @@ export default class IndexControler {
     }
 
     handleTopNavigation(){
-        const showNoteList = document.getElementById("note-list");
-        const editNoteForm = document.getElementById("note-edit");
         const createNoteButton = document.getElementById("note-create-button");
         createNoteButton.addEventListener("click", () => {
             Navigation.toggleViewModeToEdit(true);
+            this.initializeEditForm();
+  
         });
         const showNoteListButton = document.getElementById("note-list-button");
         showNoteListButton.addEventListener("click", () => {
             Navigation.toggleViewModeToEdit();
         });
+    }
+
+    initializeEditForm(){
+        document.getElementById("note-edit-title").innerHTML = "Note Create";
+        const actionElement = document.getElementById("note-action");
+        actionElement.setAttribute("data-action" , "createNote") ;
+        actionElement.innerHTML = "Create";
+        document.getElementById("data-note-id-view").innerHTML = null;
+        document.getElementById("data-note-id").value = null;
+        document.getElementById("data-note-title").value = null;
+        document.getElementById("data-note-description").value = null;
+        document.getElementById("data-note-importance").value = Number(5);
+        document.getElementById("data-note-duedate").value = null;
+        document.getElementById("data-note-creationdate").innerHTML = null;
+        document.getElementById("data-note-creationdatehidden").value = null;
+        document.getElementById("data-note-isdone").checked = false 
     }
 
     handleList(){
@@ -45,13 +56,13 @@ export default class IndexControler {
             } else if (event.target.id === "note-delete-button"){
                 await this.handleDelete(event);
             }  else {
-                await this.handleSortFilter(event);
+                await this.handleSortFilter();
             } 
         });
     }
  
-    async handleSortFilter(event){
-        const sorted = await listSortFilterUtility.handleSortFilter(event); 
+    async handleSortFilter(){
+        const sorted = await listSortFilterUtility.handleSortFilter(); 
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {notes : sorted},
                 {allowProtoPropertiesByDefault: true});
@@ -59,6 +70,7 @@ export default class IndexControler {
     }
 
     handleEditForm(){
+                this.initializeEditForm();
                 this.noteForm = document.getElementById("note-form");
                 this.noteForm.addEventListener('submit', async (event) => {
                     // event.preventDefault();
@@ -69,14 +81,13 @@ export default class IndexControler {
                     if (noteAction === "updateNote"){
                         await this.handleUpdate(json);
                         
-                    } if (noteAction === "addNote"){  
+                    } if (noteAction === "createNote"){  
                         await this.handleCreate(json);
                     } 
                     // reset view
-                    document.getElementById("note-edit-title").innerHTML = "Note Create";
+                    this.initializeEditForm();
                     this.renderView();
-                });
-
+                });  
     }
 
     async handleCreate(json){
@@ -118,7 +129,7 @@ export default class IndexControler {
     }
     
     async handleUpdate(json){
-        const id = json.id;
+        const {id} = json;
         const {title} = json;
         const {description} = json;
         const importance = Number(json.importance);

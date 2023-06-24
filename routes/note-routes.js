@@ -1,5 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable import/prefer-default-export */
 import express from 'express';
 import {notesControler} from '../controlers/notes-controler.js';
 

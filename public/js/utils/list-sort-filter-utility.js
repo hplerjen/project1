@@ -6,7 +6,7 @@ export default class ListSortFilterUtility {
         this.notesView = [];
     }
 
-    async handleSortFilter(event){
+    async handleSortFilter(){
         const {sort} = document.activeElement.dataset;
         const {field} = document.activeElement.dataset;
 
