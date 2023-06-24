@@ -73,7 +73,7 @@ export default class IndexControler {
                 this.initializeEditForm();
                 this.noteForm = document.getElementById("note-form");
                 this.noteForm.addEventListener('submit', async (event) => {
-                    // event.preventDefault();
+                    event.preventDefault();
                     const noteAction = document.activeElement.dataset.action;
                     const data = new FormData(event.target);
                     const json = Object.fromEntries(data.entries());
