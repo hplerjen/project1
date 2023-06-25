@@ -9,17 +9,15 @@ export default class ListSortFilterUtility {
     async handleSortFilter(){
         const {sort} = document.activeElement.dataset;
         const {field} = document.activeElement.dataset;
-
+        
         // load note list from service
         const notes = await noteRESTService.getNotes();
         this.notesView = [...notes];
-        
+    
         if (field === "isDone" && sort === "FILTER-ON"){
             this.notesView = this.notesView.filter(note => note.isDone === false);
         } else if (field === "isDone" && sort === "FILTER-OFF"){
             this.notesView = notes;
-        } else if (field === "_id"){ 
-            this.sortCriteriaString(field, sort); 
         } else if (field === "title" ){
             this.sortCriteriaString(field, sort);
         } else if (field === "description" ){

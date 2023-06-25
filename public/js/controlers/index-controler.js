@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-debugger */
+/* eslint-disable no-unused-vars */
 import {noteRESTService}  from '../services/note-REST-service.js';
 import {listSortFilterUtility} from '../utils/list-sort-filter-utility.js' 
 import Navigation from '../utils/navigation.js' 
@@ -35,7 +38,6 @@ export default class IndexControler {
         const actionElement = document.getElementById("note-action");
         actionElement.setAttribute("data-action" , "createNote") ;
         actionElement.innerHTML = "Create";
-        document.getElementById("data-note-id-view").innerHTML = null;
         document.getElementById("data-note-id").value = null;
         document.getElementById("data-note-title").value = null;
         document.getElementById("data-note-description").value = null;
@@ -62,7 +64,7 @@ export default class IndexControler {
     }
  
     async handleSortFilter(){
-        const sorted = await listSortFilterUtility.handleSortFilter(); 
+        const sorted = await listSortFilterUtility.handleSortFilter();
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {notes : sorted},
                 {allowProtoPropertiesByDefault: true});
@@ -127,7 +129,6 @@ export default class IndexControler {
         const actionElement = document.getElementById("note-action");
         actionElement.setAttribute("data-action" , "updateNote") ;
         actionElement.innerHTML = "Update";
-        document.getElementById("data-note-id-view").innerHTML = note._id;
         document.getElementById("data-note-id").value = note._id;
         document.getElementById("data-note-title").value = note.title;
         document.getElementById("data-note-description").value = note.description;

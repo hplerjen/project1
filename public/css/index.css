@@ -1,10 +1,10 @@
 :root {
-  --background: rgb(255, 255, 255);
+  --background: white;
   --color: #222222;
 }
 
 .dark-theme {
-  --background: #222;
+  --background: #222222;
   --color: white;
 }
 
@@ -24,9 +24,6 @@ main {
   flex: 0 0 80%;
 }
 
-aside {
-  flex: 0 0 20%;
-}
 
 footer {
   flex: 0 0 100%;
@@ -54,8 +51,10 @@ h1 {
   border-bottom: 1px solid #000;
 }
 
+
 textarea {
-  height: 200px;
+  height:200px;
+  width: 400px;
 }
 
 button {
@@ -75,22 +74,22 @@ section {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  padding: 10px;
-  gap: 10px;
-}
-
-.grid-container2 {
-  display: grid;
-  grid-template-columns: auto auto ;
-  padding: 10px;
-  gap: 10px;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  padding: 20px;
+  gap: 20px;
 }
 
 .grid-item {
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.8);
   text-align: left;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+  gap: 10px;
 }
 
 .grid-item2 {
