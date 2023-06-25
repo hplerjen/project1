@@ -20,18 +20,12 @@
     "object-curly-spacing": "off",
     "linebreak-style": "off",
     "class-methods-use-this": "off",
-    //"prefer-default-export" : "off",
     "no-unused-expressions" : "off",
-    // "no-unused-vars": "off",
-    //"array-callback-return": "off",
     "arrow-body-style": "off",
     "object-shorthand": "off",
-    //"no-undef": "off",
-    //"no-return-await": "off",
     "no-alert": "off",
     "no-underscore-dangle": "off",
-    "no-restricted-globals": "off",
-    //"import/prefer-default-export": "off"
+    "no-restricted-globals": "off"
   },
   "globals": {
     "Handlebars": "readonly"

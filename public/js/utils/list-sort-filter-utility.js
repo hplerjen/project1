@@ -18,11 +18,8 @@ export default class ListSortFilterUtility {
             this.notesView = this.notesView.filter(note => note.isDone === false);
         } else if (field === "isDone" && sort === "FILTER-OFF"){
             this.notesView = notes;
-        
-        // FIXME remove after finnish
-        } else if (field === "id"){ 
+        } else if (field === "_id"){ 
             this.sortCriteriaString(field, sort); 
-
         } else if (field === "title" ){
             this.sortCriteriaString(field, sort);
         } else if (field === "description" ){
