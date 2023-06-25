@@ -1,6 +1,6 @@
 :root {
-  --background: white;
-  --color: #222;
+  --background: rgb(255, 255, 255);
+  --color: #222222;
 }
 
 .dark-theme {
@@ -55,7 +55,7 @@ h1 {
 }
 
 textarea {
-  height: 150px;
+  height: 200px;
 }
 
 button {

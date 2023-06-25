@@ -90,23 +90,35 @@ export default class IndexControler {
                 });  
     }
 
-    async handleCreate(json){
+    prepareInputForCU(json, isCreate = false){
         const {title} = json;
         const {description} = json;
         const importance = Number(json.importance);
+        const creationDate = json.creationdatehidden;
         const dueDate = json.duedate;
         const isDone = Boolean(json.isdone);
-            
+        
         const note = {
             title: title, 
             description: description , 
             importance: importance, 
-            creationDate: new Date(),
+            creationDate: isCreate? new Date(): IndexControler.formatDateCHISO(creationDate),
             dueDate: IndexControler.formatDateCHISO(dueDate),
             isDone: isDone
-        };  
+        };
+        return note;
+    }
+
+    async handleCreate(json){
+        const note = this.prepareInputForCU(json, true);
         await noteRESTService.createNote(note);
     } 
+
+    async handleUpdate(json){
+        const {id} = json;
+        const note = this.prepareInputForCU(json);
+        await noteRESTService.updateNote(id, note); 
+    }
 
     async handleEdit(event){
         const id = event.target.dataset.noteId;
@@ -128,25 +140,7 @@ export default class IndexControler {
         Navigation.toggleViewModeToEdit(true);
     }
     
-    async handleUpdate(json){
-        const {id} = json;
-        const {title} = json;
-        const {description} = json;
-        const importance = Number(json.importance);
-        const creationDate = json.creationdatehidden;
-        const dueDate = json.duedate;
-        const isDone = Boolean(json.isdone);
-        
-        const note = {
-            title: title, 
-            description: description , 
-            importance: importance, 
-            creationDate: IndexControler.formatDateCHISO(creationDate),
-            dueDate: IndexControler.formatDateCHISO(dueDate),
-            isDone: isDone
-        };
-        await noteRESTService.updateNote(id, note); 
-    }
+
 
     async handleDelete(event){
         const doDelete = confirm("Do you really want to delete this note?");
