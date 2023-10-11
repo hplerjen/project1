@@ -9,7 +9,13 @@ export default class IndexControler {
     constructor() { 
         this.handleTopNavigation();
         this.handleList();      
-        this.handleEditForm();       
+        this.handleEditForm(); 
+        // FIXME - sort / filter im local storage oder in der DB per user speichern
+        this.sort =  {
+            field: "",
+            asc: true
+        }
+        this.filter = false; 
     }
 
     initialize() {
