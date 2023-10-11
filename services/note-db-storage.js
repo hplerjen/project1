@@ -8,6 +8,8 @@ export class NoteDBStore {
     }
 
     async all() {
+        // eslint-disable-next-line spaced-comment
+        //FIXME filter and sort should happe here
         return this.db.find({}).sort({ id: 1 }).exec();
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 export class HttpService {
     
     async ajax(method, url, data, headers) {
