@@ -7,4 +7,5 @@ router.post("/", notesControler.createNote);
 router.get("/:id/", notesControler.readNote);
 router.put("/:id/", notesControler.updateNote);
 router.delete("/:id/", notesControler.deleteOrder);
+// eslint-disable-next-line import/prefer-default-export
 export const noteRoutes = router;

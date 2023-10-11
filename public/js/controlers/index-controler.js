@@ -64,13 +64,13 @@ export default class IndexControler {
             } else if (event.target.id === "note-delete-button"){
                 await this.handleDelete(event);
             }  else {
-                await this.handleSortFilter();
+                await this.handleSortFilter(this.sort, this.filter);
             } 
         });
     }
  
-    async handleSortFilter(){
-        const sorted = await listSortFilterUtility.handleSortFilter();
+    async handleSortFilter(filter){
+        const sorted = await listSortFilterUtility.handleSortFilter(filter);
         this.noteContainer.innerHTML = this.noteTemplateCompiled(
                 {notes : sorted},
                 {allowProtoPropertiesByDefault: true});

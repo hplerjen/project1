@@ -8,7 +8,7 @@ export default class ListSortFilterUtility {
 
     async handleSortFilter(){
         // FIXME wrong approach
-        const {sort} = document.activeElement.dataset;
+const {sort} = document.activeElement.dataset;
         const {field} = document.activeElement.dataset;
         
         // load note list from service
